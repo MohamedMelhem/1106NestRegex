@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webshop rendelés</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1>Webshop rendelés</h1>
+    <% if (locals.error) { %>
+        <p role="alert"><%= error %></p>
+    <% } %>
+    <% if (locals.success) { %>
+        <p role="status"><%= success %></p>
+    <% } %>
+
+    <form method="post">
+        <label>Név:<br>
+            <input type="text" name="name" value="<%= formData.name %>" required>
+        </label>
+
+        <fieldset>
+            <legend>Számlázási cím</legend>
+            <label>Város:<br>
+                <input type="text" name="billing_city" value="<%= formData.billing_city %>" required>
+            </label>
+            <label>Irányítószám:<br>
+                <input type="text" name="billing_postal_code" inputmode="numeric" maxlength="4"
+                    value="<%= formData.billing_postal_code %>" required>
+            </label>
+            <label>Utca és házszám:<br>
+                <input type="text" name="billing_street" value="<%= formData.billing_street %>" required>
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Szállítási cím</legend>
+            <label>Város:<br>
+                <input type="text" name="shipping_city" value="<%= formData.shipping_city %>" required>
+            </label>
+            <label>Irányítószám:<br>
+                <input type="text" name="shipping_postal_code" inputmode="numeric" maxlength="4"
+                    value="<%= formData.shipping_postal_code %>" required>
+            </label>
+            <label>Utca és házszám:<br>
+                <input type="text" name="shipping_street" value="<%= formData.shipping_street %>" required>
+            </label>
+        </fieldset>
+
+        <label>Telefonszám (pl. +36 30 123 4567):<br>
+            <input type="tel" name="phone_number" value="<%= formData.phone_number %>" required>
+        </label>
+
+        <label>Kuponkód (opcionális, pl. PT-1255):<br>
+            <input type="text" name="coupon_code" value="<%= formData.coupon_code %>">
+        </label>
+
+        <fieldset>
+            <legend>Fizetés bankkártyával</legend>
+            <label>Kártyabirtokos neve:<br>
+                <input type="text" name="cardholder" autocomplete="cc-name" required>
+            </label>
+            <label>Bankkártyaszám (csak számjegyek):<br>
+                <input type="text" name="card_number" inputmode="numeric" autocomplete="cc-number"
+                    required>
+            </label>
+            <label>Lejárat (HH/ÉÉ):<br>
+                <input type="text" name="card_expiry" placeholder="12/28" autocomplete="cc-exp" required>
+            </label>
+            <label>CVC:<br>
+                <input type="password" name="card_cvc" inputmode="numeric" autocomplete="cc-csc" required>
+            </label>
+        </fieldset>
+
+        <button type="submit">Ellenőrzés</button>
+    </form>
+</body>
+</html>
